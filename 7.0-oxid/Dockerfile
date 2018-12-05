@@ -9,4 +9,18 @@ RUN apt-get update && \
     docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql bcmath xml xsl intl soap && \
     echo 'sendmail_path = "/usr/sbin/sendmail -t -i"' > /usr/local/etc/php/php.ini
 
+RUN apt-get -y install \
+    autoconf \
+    dpkg-dev dpkg \
+    file \
+    g++ \
+    gcc \
+    libc-dev \
+    make \
+    pkgconf \
+    re2c \
+    coreutils
+
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 CMD ["echo", "'Done'"]
